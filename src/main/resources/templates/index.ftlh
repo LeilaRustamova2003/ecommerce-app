@@ -10,7 +10,7 @@
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: #f4f7f6; color: #333; }
 
-        /* Modern Navbar - Koyu Mavi */
+        
         header {
             background-color: #002d5b;
             padding: 15px 5%;
@@ -27,7 +27,7 @@
         .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
         h2 { margin-bottom: 30px; font-size: 32px; color: #002d5b; border-bottom: 3px solid #00d4ff; display: inline-block; padding-bottom: 5px; }
 
-        /* Ürün Kartları */
+        
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -53,7 +53,7 @@
         .product-desc { font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6; flex-grow: 1; }
         .product-price { font-size: 22px; font-weight: 600; color: #2ecc71; margin-bottom: 20px; }
 
-        /* SmartShop Mavisi Buton */
+        
         .add-btn {
             background-color: #00d4ff;
             color: #002d5b;
