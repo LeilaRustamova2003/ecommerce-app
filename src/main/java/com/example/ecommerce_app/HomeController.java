@@ -19,11 +19,11 @@ public class HomeController {
                 "Apple's latest flagship, A17 Pro chip."));
 
         productList.add(new Product(2, "MacBook Air M3", 4299.00,
-                "https://www.apple.com/v/macbook-air-13-and-15-m3/a/images/overview/hero/hero__f1j9y92976iu_large_2x.jpg",
+                "https://p.turbosquid.com/ts-thumb/2P/b7OlEw/IG/gray06/jpg/1709794616/1920x1080/fit_q87/60fb232038e55b7107d3acf05a1bf439f064e97b/gray06.jpg",
                 "Supercharged by M3 chip, 13.6-inch."));
 
         productList.add(new Product(3, "Apple Watch Series 9", 1299.00,
-                "https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/MT633_VW_34FR+watch-case-45-aluminum-starlight-nc-s9_VW_34FR+watch-face-45-aluminum-starlight-s9_VW_34FR?wid=2000&hei=2000&fmt=png-alpha&.v=1694507905182",
+                "https://xn--80acvibpxfdi5h.xn--e1anecbk3a.xn--p1ai/wp-content/uploads/2023/10/apple-watch-s9-kategoriya.jpg",
                 "Smarter, brighter, mightier."));
 
         model.addAttribute("productList", productList);

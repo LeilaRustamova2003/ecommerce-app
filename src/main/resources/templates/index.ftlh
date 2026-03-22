@@ -50,12 +50,12 @@
         }
 
 
-        .product-image {
-         width: 100%;
-         height: 180px;
-         object-fit: contain;
-         margin-bottom: 15px;
-         background-color: #fff;
+         .product-image {
+          width: 100%;
+          height: 180px;
+          object-fit: contain;
+          display: block;
+          margin: 0 auto 15px auto;
 }
 
 
@@ -95,15 +95,11 @@
         <#list productList as product>
         <div class="product-card">
             <img src="${product.imageUrl}" alt="${product.name}" class="product-image">
-
             <div class="product-name">${product.name}</div>
             <div class="product-desc">${product.description}</div>
             <div class="product-price">${product.price} GEL</div>
             <button class="add-btn">Buy Now</button>
         </div>
     </#list>
-</div>
-</div>
-
-</body>
+</div> </div> </body>
 </html>
