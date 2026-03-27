@@ -89,7 +89,7 @@
     <div class="nav-right">
         <div class="user-panel">
             <span>Hello, <b>${userName}</b></span>
-            <small>TSU Tech Group</small>
+            <small>SmartShop Group</small>
         </div>
         <button class="cart-trigger" onclick="toggleCart()">
             <i class="fas fa-shopping-cart"></i>
