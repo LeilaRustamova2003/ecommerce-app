@@ -4,201 +4,238 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartShop | Premium Electronics</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f0f2f5; color: #1a1a1a; min-height: 100vh; }
+        :root { --amazon-blue: #131921; --amazon-light-blue: #232f3e; --amazon-gold: #febd69; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #eaeded; color: #0f1111; font-size: 14px; }
 
-        /* --- Navigation & User Info --- */
         header {
-            background-color: #131921;
+            background: var(--amazon-blue);
             padding: 10px 5%;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .logo { font-size: 22px; font-weight: 700; color: #febd69; text-decoration: none; }
-        .nav-right { display: flex; gap: 20px; align-items: center; }
-        .user-panel { font-size: 13px; text-align: right; }
-        .user-panel b { color: #febd69; display: block; font-size: 15px; }
-
-        /* --- Search Bar Section --- */
-        .search-wrapper { background: #232f3e; padding: 10px 5%; display: flex; gap: 10px; }
-        .search-input { flex: 1; padding: 10px 15px; border-radius: 4px; border: none; outline: none; font-size: 14px; }
-        .search-submit { background: #febd69; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: 600; }
-
-        /* --- Shopping Cart UI --- */
-        .cart-trigger { position: relative; cursor: pointer; background: none; border: none; color: white; font-size: 24px; }
-        .cart-badge {
-            position: absolute; top: -5px; right: -8px;
-            background: #f08804; color: black; font-size: 12px;
-            padding: 2px 6px; border-radius: 50%; font-weight: bold;
         }
 
-        /* --- Sidebar Cart Panel --- */
-        #cartSidebar {
-            position: fixed; right: -350px; top: 0; width: 320px; height: 100%;
-            background: white; box-shadow: -5px 0 15px rgba(0,0,0,0.2);
-            transition: 0.3s ease-in-out; z-index: 2000; padding: 20px;
-            display: flex; flex-direction: column;
-        }
-        #cartSidebar.active { right: 0; }
-        .cart-header { border-bottom: 2px solid #131921; padding-bottom: 15px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center; }
-        .cart-items { flex: 1; overflow-y: auto; }
-        .cart-item { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; align-items: center; font-size: 13px; }
-        .delete-item { color: #007185; cursor: pointer; font-weight: 600; border: none; background: none; font-size: 11px; }
+        .logo { font-size: 22px; font-weight: 700; color: var(--amazon-gold); text-decoration: none; }
 
-        /* --- Product Grid & Cards --- */
-        .container { max-width: 1200px; margin: 30px auto; padding: 0 15px; }
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 20px; }
+        .nav-xshop-container {
+            background: var(--amazon-light-blue);
+            padding: 8px 5%;
+            display: flex;
+            gap: 15px;
+            color: white;
+        }
+
+        .search-wrapper {
+            background: var(--amazon-light-blue);
+            padding: 10px 5%;
+            display: flex;
+            gap: 5px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 4px 0 0 4px;
+            border: none;
+        }
+
+        .search-submit {
+            background: var(--amazon-gold);
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .main-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 5%;
+        }
+
+        .category-card {
+            background: white;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            min-height: 420px;
+        }
+
+        .quad-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .quad-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: contain;
+        }
+
+        .see-more {
+            margin-top: auto;
+            color: #007185;
+            text-decoration: none;
+        }
 
         .product-card {
-            background: white; padding: 20px; border-radius: 8px;
-            display: flex; flex-direction: column;
-            border: 1px solid #ddd; transition: 0.2s; position: relative;
+            background: white;
+            padding: 15px;
+            text-align: center;
         }
-        .product-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
 
-        .sale-badge { position: absolute; top: 10px; right: 10px; background: #e74c3c; color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
-        .category-tag { font-size: 11px; color: #007185; font-weight: 600; text-transform: uppercase; margin-bottom: 8px; }
-        .product-image { width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px; }
-        .product-name { font-size: 15px; font-weight: 600; height: 45px; overflow: hidden; margin-bottom: 10px; }
-
-        .current-price { font-size: 19px; font-weight: 700; color: #B12704; }
-        .old-price { text-decoration: line-through; color: #565959; font-size: 14px; margin-left: 8px; }
-
-        /* --- Amazon Style Buttons --- */
-        .btn-amazon {
-            background: #ffd814; border: 1px solid #fcd200; border-radius: 20px;
-            padding: 10px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 500;
+        .product-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
         }
-        .btn-amazon:hover { background: #f7ca00; }
-        .btn-checkout { background: #ffa41c; border-radius: 8px; margin-top: 15px; font-weight: 600; }
+
+        /* CART */
+        #cartSidebar {
+            position: fixed;
+            right: -350px;
+            top: 0;
+            width: 320px;
+            height: 100%;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            transition: 0.3s;
+            padding: 20px;
+        }
+
+        #cartSidebar.active {
+            right: 0;
+        }
     </style>
 </head>
+
 <body>
 
 <header>
     <a href="/" class="logo">SmartShop.ge</a>
-    <div class="nav-right">
-        <div class="user-panel">
-            <span>Hello, <b>${userName}</b></span>
-            <small>SmartShop Group</small>
-        </div>
-        <button class="cart-trigger" onclick="toggleCart()">
+
+    <div style="display:flex; gap:20px; align-items:center;">
+        <div>Hello, <b>${userName}</b></div>
+
+        <button onclick="toggleCart()" style="background:none; border:none; color:white; font-size:20px; cursor:pointer; position:relative;">
             <i class="fas fa-shopping-cart"></i>
-            <span class="cart-badge" id="cartBadge">0</span>
+            <span id="cartBadge" style="position:absolute; top:-8px; right:-10px; background:#f08804; padding:2px 5px; border-radius:50%; font-size:10px;">0</span>
         </button>
     </div>
 </header>
 
+<div class="nav-xshop-container">
+    <span>Today's Deals</span>
+    <span>Customer Service</span>
+    <span>Registry</span>
+    <span>Sell</span>
+</div>
+
 <form action="/" method="get" class="search-wrapper">
-    <input type="text" name="search" class="search-input" placeholder="Search products..." value="${searchQuery!''}">
-    <button type="submit" class="search-submit">Search</button>
+    <input type="text" name="search" class="search-input" placeholder="Search SmartShop...">
+    <button type="submit" class="search-submit">
+        <i class="fas fa-search"></i>
+    </button>
 </form>
 
+<!-- CART -->
 <div id="cartSidebar">
-    <div class="cart-header">
-        <h3>Shopping Cart</h3>
-        <button onclick="toggleCart()" style="border:none; background:none; font-size:24px; cursor:pointer;">&times;</button>
-    </div>
-    <div id="cartItems" class="cart-items">
-    </div>
-    <div style="border-top: 1px solid #ddd; padding-top: 15px;">
-        <div style="display:flex; justify-content:space-between; font-weight:700; font-size: 18px;">
-            <span>Total:</span>
-            <span id="cartTotal">0.00 GEL</span>
-        </div>
-        <button class="btn-amazon btn-checkout" onclick="alert('Proceeding to Payment...')">Checkout</button>
+    <h3>Your Basket</h3>
+    <hr><br>
+    <div id="cartItems"></div>
+    <div style="margin-top:20px;">
+        <strong>Total: <span id="cartTotal">0.00</span> GEL</strong>
     </div>
 </div>
 
-<div class="container">
-    <h2 style="margin-bottom: 20px;">Featured Products</h2>
-    <div class="product-grid">
+<div class="main-container">
+
+    <#-- SEARCH -->
+    <#if searchQuery?? && searchQuery?has_content>
+
+    <#if productList?size == 0>
+    <h2>No products found</h2>
+    <#else>
+    <#list productList as product>
+    <div class="product-card">
+        <img src="${product.imageUrl}">
+        <h3>${product.name}</h3>
+        <p>${product.price} GEL</p>
+        <button onclick="addToCart('${product.name}', ${product.price})">Add to Cart</button>
+    </div>
+</#list>
+</#if>
+
+<#-- NORMAL -->
+<#else>
+
+<#macro quadCategory title categoryName>
+<div class="category-card">
+    <h3>${title}</h3>
+
+    <div class="quad-grid">
+        <#assign count = 0>
         <#list productList as product>
-        <div class="product-card">
-            <#if (product.oldPrice > product.price)>
-            <div class="sale-badge">SALE</div>
-        </#if>
-
-        <div class="category-tag">${product.category}</div>
-        <img src="${product.imageUrl}" class="product-image">
-        <div class="product-name">${product.name}</div>
-
-        <div style="margin-bottom: 15px;">
-            <span class="current-price">${product.price} GEL</span>
-            <#if (product.oldPrice > product.price)>
-            <span class="old-price">${product.oldPrice} GEL</span>
-        </#if>
-    </div>
-
-    <button class="btn-amazon" <#if (product.stock == 0)>disabled</#if>
-onclick="addToCart('${product.name}', ${product.price})">
-<#if (product.stock > 0)>Add to Cart<#else>Out of Stock</#if>
-</button>
-</div>
+        <#if product.category == categoryName && count < 4>
+        <div class="quad-item" onclick="addToCart('${product.name}', ${product.price})">
+            <img src="${product.imageUrl}">
+            <span>${product.name}</span>
+        </div>
+        <#assign count = count + 1>
+    </#if>
 </#list>
 </div>
+
+<a href="/category?type=${categoryName}" class="see-more">See more</a>
+</div>
+</#macro>
+
+<@quadCategory title="Smart Watches" categoryName="Watch" />
+<@quadCategory title="Laptops" categoryName="Computer" />
+<@quadCategory title="Tablets" categoryName="Tablet" />
+<@quadCategory title="Phones" categoryName="Phone" />
+<@quadCategory title="Audio" categoryName="Audio" />
+<@quadCategory title="Accessories" categoryName="PC Accessory" />
+
+</#if>
+
 </div>
 
 <script>
-    let cart = [];
+let cart = [];
 
-    function toggleCart() {
-        document.getElementById('cartSidebar').classList.toggle('active');
-    }
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('active');
+}
 
-    function addToCart(name, price) {
-        const item = cart.find(i => i.name === name);
-        if (item) {
-            item.qty++;
-        } else {
-            cart.push({ name, price, qty: 1 });
-        }
-        renderCart();
-        if(!document.getElementById('cartSidebar').classList.contains('active')) toggleCart();
-    }
+function addToCart(name, price) {
+    const item = cart.find(i => i.name === name);
+    if(item) item.qty++; else cart.push({name, price, qty:1});
+    updateUI();
+}
 
-    function removeItem(name) {
-        cart = cart.filter(i => i.name !== name);
-        renderCart();
-    }
+function updateUI() {
+    let total = 0, count = 0;
+    const list = document.getElementById('cartItems');
+    list.innerHTML = '';
 
-    function renderCart() {
-        const list = document.getElementById('cartItems');
-        const badge = document.getElementById('cartBadge');
-        const total = document.getElementById('cartTotal');
+    cart.forEach(i => {
+        total += i.price * i.qty;
+        count += i.qty;
 
-        list.innerHTML = '';
-        let sum = 0, count = 0;
+        list.innerHTML += `<div>${i.name} x${i.qty}</div>`;
+    });
 
-        if (cart.length === 0) {
-            list.innerHTML = '<p style="text-align:center; color:#888; margin-top:20px;">Empty Cart</p>';
-        }
-
-        cart.forEach(item => {
-            sum += item.price * item.qty;
-            count += item.qty;
-            list.innerHTML += `
-                <div class="cart-item">
-                    <div>
-                        <strong>${item.name}</strong><br>
-                        ${item.qty} x ${item.price} GEL
-                    </div>
-                    <button class="delete-item" onclick="removeItem('${item.name}')">Delete</button>
-                </div>`;
-        });
-
-        badge.innerText = count;
-        total.innerText = sum.toFixed(2) + " GEL";
-    }
+    document.getElementById('cartBadge').innerText = count;
+    document.getElementById('cartTotal').innerText = total.toFixed(2);
+}
 </script>
 
 </body>
