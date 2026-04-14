@@ -1,6 +1,14 @@
 package com.example.ecommerce_app;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity // მონაცემთა ბაზის ცხრილის აღსანიშნავად
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private double price;
@@ -9,6 +17,9 @@ public class Product {
     private String description;
     private int stock;
     private String category;
+
+    // კონსტრუქტორი მონაცემთა ბაზისთვის
+    public Product() {}
 
     public Product(int id, String name, double price, double oldPrice, String imageUrl, String description, int stock, String category) {
         this.id = id;
