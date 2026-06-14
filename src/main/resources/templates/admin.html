@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ka"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{admin.title}">Admin Panel</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: Arial, sans-serif; }
+        body { background: #eaeded; padding: 20px 5%; }
+        h1 { color: #131921; margin-bottom: 20px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 4px; overflow: hidden; }
+        th { background: #131921; color: white; padding: 12px; text-align: left; }
+        td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+        tr:hover td { background: #f7f7f7; }
+        .btn-back { display: inline-block; margin-bottom: 15px; padding: 8px 20px; background: #febd69; border-radius: 4px; text-decoration: none; color: #131921; font-weight: bold; }
+        .lang-switcher { margin-bottom: 15px; font-size: 13px; }
+        .lang-switcher a { color: #007185; text-decoration: none; margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="lang-switcher">
+    <a th:href="@{/admin(lang=ka)}" th:text="#{lang.ka}">ქართული</a>
+    <a th:href="@{/admin(lang=en)}" th:text="#{lang.en}">English</a>
+</div>
+
+<a href="/" class="btn-back" th:text="#{product.back}">← Back</a>
+
+<h1 th:text="#{admin.title}">Admin Panel</h1>
+<p style="margin-bottom:15px;">
+    <span th:text="#{profile.logged_in_as}">Logged in as</span>:
+    <strong sec:authentication="name"></strong>
+</p>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th th:text="#{admin.products}">Product</th>
+        <th th:text="#{product.category}">Category</th>
+        <th th:text="#{product.price}">Price</th>
+        <th th:text="#{product.stock}">Stock</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="p : ${products}">
+        <td th:text="${p.id}"></td>
+        <td th:text="${p.name}"></td>
+        <td th:text="${p.category}"></td>
+        <td th:text="${#numbers.formatDecimal(p.price,1,2)} + ' GEL'"></td>
+        <td th:text="${p.stock}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

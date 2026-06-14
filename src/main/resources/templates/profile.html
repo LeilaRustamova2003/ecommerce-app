@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{profile.title}">Profile</title>
+    <style>
+        * { box-sizing:border-box; margin:0; padding:0; font-family:Arial,sans-serif; }
+        body { background:#eaeded; padding:40px 5%; }
+        .card { background:white; max-width:500px; margin:auto; padding:30px; border-radius:8px; text-align:center; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+        .avatar { font-size:60px; margin-bottom:15px; }
+        .lang-bar { margin-top:15px; font-size:13px; }
+        .lang-bar a { color:#007185; text-decoration:none; margin:0 5px; }
+        .btn { display:inline-block; margin-top:20px; padding:10px 25px; background:#febd69; border-radius:4px; text-decoration:none; color:#131921; font-weight:bold; }
+    </style>
+</head>
+<body>
+<div class="card">
+    <div class="avatar">👤</div>
+    <h2 th:text="#{profile.welcome}">Welcome</h2>
+    <p style="margin-top:10px;">
+        <span th:text="#{profile.logged_in_as}">Logged in as</span>:
+        <strong sec:authentication="name">username</strong>
+    </p>
+    <a href="/" class="btn" th:text="#{product.back}">← Back</a>
+    <div class="lang-bar">
+        <a th:href="@{/profile(lang=ka)}" th:text="#{lang.ka}">ქართული</a> |
+        <a th:href="@{/profile(lang=en)}" th:text="#{lang.en}">English</a>
+    </div>
+</div>
+</body>
+</html>
